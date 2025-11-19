@@ -29,9 +29,11 @@ class Database
         // Si aucune connexion n'existe encore, on l'initialise
         if (!self::$pdo) {
             // Paramètres de connexion
-            $dsn = 'mysql:host=localhost;dbname=mvc;charset=utf8mb4';
-            $user = 'root';
-            $pass = '';
+            $host = $_ENV['DB_HOST'] ?? 'localhost';
+            $port = isset($_ENV['DB_PORT']) && $_ENV['DB_PORT'] !== '' ? ';port=' . $_ENV['DB_PORT'] : '';
+            $dsn = 'mysql:host=' . $host . $port . ';dbname=' . ($_ENV['DB_NAME'] ?? 'mvc') . ';charset=utf8mb4';
+            $user = $_ENV['DB_USER'] ?? 'root';
+            $pass = $_ENV['DB_PASSWORD'] ?? '';
 
             try {
                 // Création de l'instance PDO avec options

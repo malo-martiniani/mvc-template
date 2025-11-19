@@ -1,7 +1,11 @@
 <?php
+
 // Chargement manuel des fichiers nécessaires au fonctionnement de l'application
 
 require_once __DIR__ . '/../vendor/autoload.php'; // Chargement automatique des classes via Composer
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->safeLoad();
+
 // Importation des classes avec namespaces pour éviter les conflits de noms
 use Core\Router;
 use App\Controllers\HomeController;
